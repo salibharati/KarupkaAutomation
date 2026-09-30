@@ -6,8 +6,8 @@ const env = process.env.TEST_ENV || 'qa';
 const envFile = path.resolve(__dirname, 'config', `.env.${env}`);
 const rootEnvFile = path.resolve(__dirname, '.env');
 
-dotenv.config({ path: envFile });
-dotenv.config({ path: rootEnvFile });
+dotenv.config({ path: envFile, override: true });
+dotenv.config({ path: rootEnvFile, override: true });
 
 export default defineConfig({
   testDir: './tests',

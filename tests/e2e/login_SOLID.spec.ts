@@ -3,8 +3,8 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { LoginPage_SOLID } from '../../pages/LoginPage_SOLID';
 
-dotenv.config({ path: path.resolve(__dirname, '../../config/.env.qa') });
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../config/.env.qa'), override: true });
+dotenv.config({ path: path.resolve(__dirname, '../../.env'), override: true });
 
 const TEST_EMAIL = process.env.TEST_EMAIL;
 const TEST_PASSWORD = process.env.TEST_PASSWORD;
