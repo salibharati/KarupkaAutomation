@@ -1,12 +1,12 @@
-import{Page,Locator,expect} from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { BasePage_SOLID } from './BasePage_SOLID';
-import{config} from '../config/environment'
+import { config } from '../config/environment';
 
 export class LoginPage_SOLID extends BasePage_SOLID {
     readonly emailInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
-    
+
     constructor(page: Page) {
         super(page);
         this.emailInput = page.locator(
@@ -19,21 +19,26 @@ export class LoginPage_SOLID extends BasePage_SOLID {
             'button:has-text("Login"), input[type="submit"][value*="Login" i], button[aria-label*="Login" i]'
         ).first();
     }
+
     async goto(): Promise<void> {
-        await this.navigateTo(`${config.baseUrl}${config.loginpath}`);
+        await this.navigateTo(config.loginPath);
     }
+
     async login(email: string, password: string): Promise<void> {
         await this.fill(this.emailInput, email);
         await this.fill(this.passwordInput, password);
+        await this.page.waitForTimeout(2000);
         await this.clickLocator(this.loginButton);
+        await this.page.waitForTimeout(3000);
     }
+
     async verifyLoginSuccess(): Promise<void> {
-        const currentUrl = this.page.url();
-        await expect(this.page).not.toHaveURL(/accountlogin/);  
+        await expect(this.page).not.toHaveURL(/accountlogin/i);
     }
-    async isloaded(): Promise<void> {
-        await expect(this.emailInput).toBeVisible({ timeout: 15000 });
-        await expect(this.passwordInput).toBeVisible({ timeout: 15000 });
-        await expect(this.loginButton).toBeVisible({ timeout: 15000 });
+
+    async isLoaded(): Promise<void> {
+        await this.expectLoaded(this.emailInput);
+        await this.expectLoaded(this.passwordInput);
+        await this.expectLoaded(this.loginButton);
     }
 }

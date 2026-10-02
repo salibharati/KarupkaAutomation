@@ -7,7 +7,22 @@
     "strict": true,
     "types": ["node", "@playwright/test"],
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    "config/**/*.ts",
+    "fixtures/**/*.ts",
+    "pages/**/*.ts",
+    "tests/**/*.ts",
+    "playwright.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "allure-results",
+    "allure-report",
+    "playwright-report",
+    "test-results",
+    "downloads"
+  ]
 }
 //kapruka.com - Web application
 //Actions - click, fill, scroll - file - common actions - testing XXX - basefile - .ts extension - BasePage.ts (parent)

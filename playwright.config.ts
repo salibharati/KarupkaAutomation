@@ -17,12 +17,12 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
   reporter: [
     ['html'],
-    ['allure-playwright'],
+    ['allure-playwright', { detail: false }],
   ],
   use: {
     baseURL: process.env.BASE_URL || 'https://www.kapruka.com',
     screenshot: 'only-on-failure',
-    trace: 'on',
+    trace: 'retain-on-failure',
     viewport: { width: 1280, height: 720 },
   },
 });

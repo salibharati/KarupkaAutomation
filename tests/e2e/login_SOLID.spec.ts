@@ -1,10 +1,4 @@
-import { test, expect } from '@playwright/test';
-import path from 'path';
-import dotenv from 'dotenv';
-import { LoginPage_SOLID } from '../../pages/LoginPage_SOLID';
-
-dotenv.config({ path: path.resolve(__dirname, '../../config/.env.qa'), override: true });
-dotenv.config({ path: path.resolve(__dirname, '../../.env'), override: true });
+import { test } from '../../fixtures/fixture';
 
 const TEST_EMAIL = process.env.TEST_EMAIL;
 const TEST_PASSWORD = process.env.TEST_PASSWORD;
@@ -26,14 +20,22 @@ test.describe('Kapruka Login Tests', () => {
     }
   });
 
-  test('Login with valid credentials', async ({ page }) => {
-    const loginPage = new LoginPage_SOLID(page);
+  test('Login with valid credentials', async ({ loginPage }) => {
+    await test.step('Open Kapruka login page', async () => {
+      await loginPage.goto();
+    });
 
-    await loginPage.goto();
-    await loginPage.isloaded();
-    await loginPage.login(email, password);
-    await loginPage.verifyLoginSuccess();
-    await expect(page).not.toHaveURL(/accountlogin/i);
+    await test.step('Validate login page is ready', async () => {
+      await loginPage.isLoaded();
+    });
+
+    await test.step('Enter login details and submit', async () => {
+      await loginPage.login(email, password);
+    });
+
+    await test.step('Validate login completed', async () => {
+      await loginPage.verifyLoginSuccess();
+    });
   });
 });
 

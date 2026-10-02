@@ -1,6 +1,6 @@
-export const config = { 
-        
-        baseUrl: process.env.BASE_URL || 'https://www.kapruka.com',
-        loginpath: '/shops/customerAccounts/accountLogin.jsp',
-        
-    };
+const baseUrl = (process.env.BASE_URL || 'https://www.kapruka.com').replace(/\/+$/, '');
+
+export const config = {
+    baseUrl,
+    loginPath: '/shops/customerAccounts/accountLogin.jsp',
+};
