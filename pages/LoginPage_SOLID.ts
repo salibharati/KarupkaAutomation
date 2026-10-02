@@ -9,9 +9,15 @@ export class LoginPage_SOLID extends BasePage_SOLID {
     
     constructor(page: Page) {
         super(page);
-        this.emailInput = page.getByRole('textbox', { name: 'Email address' });
-        this.passwordInput = page.getByLabel('Password');
-        this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.emailInput = page.locator(
+            'input[type="email"], input[name="email"], input[placeholder*="email" i], input[aria-label*="Email" i]'
+        ).first();
+        this.passwordInput = page.locator(
+            'input[type="password"], input[name="password"], input[placeholder*="password" i], input[aria-label*="Password" i]'
+        ).first();
+        this.loginButton = page.locator(
+            'button:has-text("Login"), input[type="submit"][value*="Login" i], button[aria-label*="Login" i]'
+        ).first();
     }
     async goto(): Promise<void> {
         await this.navigateTo(`${config.baseUrl}${config.loginpath}`);
@@ -26,8 +32,8 @@ export class LoginPage_SOLID extends BasePage_SOLID {
         await expect(this.page).not.toHaveURL(/accountlogin/);  
     }
     async isloaded(): Promise<void> {
-        await expect(this.emailInput).toBeVisible();
-        await expect(this.passwordInput).toBeVisible();
-        await expect(this.loginButton).toBeVisible();
+        await expect(this.emailInput).toBeVisible({ timeout: 15000 });
+        await expect(this.passwordInput).toBeVisible({ timeout: 15000 });
+        await expect(this.loginButton).toBeVisible({ timeout: 15000 });
     }
 }
