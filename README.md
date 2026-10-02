@@ -84,8 +84,8 @@ The project reads values from:
 Example:
 
 ```env
-TEST_EMAIL=your_email@example.com
-TEST_PASSWORD=your_password_here
+TEST_EMAIL=automaisali@gmail.com
+TEST_PASSWORD=Chikku@123#
 BASE_URL=https://www.kapruka.com
 ```
 
