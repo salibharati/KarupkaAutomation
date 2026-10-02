@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_ENV: qa
-      RUN_LIVE_LOGIN: 'false'
       TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
       TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
       BASE_URL: ${{ secrets.BASE_URL }}

@@ -1,11 +1,6 @@
 import { test } from '../../fixtures/fixture';
 
 test.describe('Kapruka Currency', () => {
-  test.skip(
-    Boolean(process.env.CI) && process.env.RUN_LIVE_CURRENCY !== 'true',
-    'Skipping live Kapruka currency test in CI. Set RUN_LIVE_CURRENCY=true to run it explicitly.'
-  );
-
   test('should change currency from INR to USD and verify selection', async ({ currencyPage }) => {
     await test.step('Open Kapruka homepage', async () => {
       await currencyPage.goto();
