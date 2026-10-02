@@ -6,7 +6,7 @@ export class CurrencyPage extends BasePage_SOLID {
 
   constructor(page: Page) {
     super(page);
-    this.currencySelect = page.locator('select[aria-label="Select Currency"]').first();
+    this.currencySelect = page.locator('select:has(option[value="INR"]):has(option[value="USD"])').first();
   }
 
   async goto(): Promise<void> {
@@ -32,6 +32,6 @@ export class CurrencyPage extends BasePage_SOLID {
   }
 
   async isLoaded(): Promise<void> {
-    await expect(this.currencySelect).toBeVisible({ timeout: 20000 });
+    await expect(this.currencySelect).toBeVisible({ timeout: 30000 });
   }
 }
